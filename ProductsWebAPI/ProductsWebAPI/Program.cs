@@ -1,14 +1,19 @@
+using Infrastructure.Interfaces;
+using Infrastructure.Services;
+
 namespace ProductsWebAPI
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            var builder = WebApplication.CreateBuilder(args); // инициализирует корневой каталог и конфигурирует приложение
 
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddRazorPages();
+            builder.Services.AddSingleton<IProductService, ProductService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
