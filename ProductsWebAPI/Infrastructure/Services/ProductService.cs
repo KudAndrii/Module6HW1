@@ -16,7 +16,7 @@ namespace Infrastructure.Services
         public List<ProductModel> _products;
         public ProductService()
         {
-            _products = Deserialize<List<ProductModel>>(_productInfoPath);
+            _products = Deserialize<ProductModel>(_productInfoPath);
         }
 
         public void DeleteOne(int id)
@@ -52,7 +52,14 @@ namespace Infrastructure.Services
             }
         }
 
-        private TModel Deserialize<TModel>(in string path)
+        /// <summary>
+        /// Method gets original state of list of products.
+        /// </summary>
+        /// <typeparam name="TModel">Model of product.</typeparam>
+        /// <param name="path">Path to JSON file of list of products.</param>
+        /// <returns>List of TModels.</returns>
+        /// <exception cref="DirectoryNotFoundException">Exception which will be thrown if file by given path is empty.</exception>
+        private List<TModel> Deserialize<TModel>(in string path)
         {
             var configFile = File.ReadAllText(path);
             if (string.IsNullOrEmpty(configFile))
@@ -60,7 +67,7 @@ namespace Infrastructure.Services
                 throw new DirectoryNotFoundException();
             }
 
-            return JsonConvert.DeserializeObject<TModel>(configFile);
+            return JsonConvert.DeserializeObject<List<TModel>>(configFile);
         }
     }
 }

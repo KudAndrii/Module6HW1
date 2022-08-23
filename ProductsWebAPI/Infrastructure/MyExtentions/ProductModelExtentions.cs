@@ -9,6 +9,11 @@ namespace Infrastructure.MyExtentions
     using Core;
     public static class ProductModelExtentions
     {
+        /// <summary>
+        /// Method updates all properties if it is not null.
+        /// </summary>
+        /// <param name="productForChanging">Product which will be changed.</param>
+        /// <param name="newProduct">Product with new values.</param>
         public static void ReplaceNotNullProperties(this ProductModel productForChanging, ProductModel newProduct)
         {
             if (newProduct.ProductId is not null)
