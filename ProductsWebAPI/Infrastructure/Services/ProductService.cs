@@ -10,13 +10,15 @@ namespace Infrastructure.Services
     using Infrastructure.Interfaces;
     using Newtonsoft.Json;
     using Infrastructure.Extentions;
+    using Infrastructure.Configurations;
+    using Microsoft.Extensions.Options;
+
     public class ProductService : IProductService
     {
-        private const string _productInfoPath = @"C:\Users\cudan\Documents\GitHub\Module6HW1\ProductsWebAPI\Infrastructure\ProductsInfo.json";
         public List<ProductModel> _products;
-        public ProductService()
+        public ProductService(IOptions<ProductsConfiguration> productsConfiguration)
         {
-            _products = Deserialize<ProductModel>(_productInfoPath);
+            _products = Deserialize<ProductModel>(productsConfiguration.Value.ProductsDataPath);
         }
 
         public void DeleteOne(int id)
