@@ -8,20 +8,16 @@ namespace ProductsWebAPI
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args); // реализация IHost
-
-            // Add services to the container.
+            var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllers();
             builder.Services.AddSingleton<IProductService, ProductService>();
             builder.Services.Configure<ProductsConfiguration>(builder.Configuration.GetSection("ProductsConfiguration"));
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer(); // определение api
+            builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            var app = builder.Build(); // генерация хоста, который запускается как приложение
+            var app = builder.Build();
 
-            // Configure the HTTP request pipeline. все что ниже - middlewhare
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

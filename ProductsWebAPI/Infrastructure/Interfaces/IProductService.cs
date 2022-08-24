@@ -26,18 +26,21 @@ namespace Infrastructure.Interfaces
         /// Method adds product to List of ProductModels.
         /// </summary>
         /// <param name="model">ProductModel which should be added.</param>
-        public void InsertOne(ProductModel model);
+        /// <returns>True if element was added, false - element with given id is exist.</returns>
+        public bool InsertOne(ProductModel model);
 
         /// <summary>
         /// Method updates existing product in list, or adds it if list don't contains it.
         /// </summary>
         /// <param name="model">ProductModel which should be updated.</param>
-        public void UpdateOne(ProductModel model);
+        /// <returns>Index of updated element, "-1" - if element was added.</returns>
+        public int UpdateOne(ProductModel model);
 
         /// <summary>
         /// Method deletes product from list of ProductModels by given id. 
         /// </summary>
         /// <param name="id">ProductId property of ProductModel which should be deleted.</param>
-        public void DeleteOne(int id);
+        /// <returns>True if element was deleted, false - element with given id was not found.</returns>
+        public bool DeleteOne(int id);
     }
 }

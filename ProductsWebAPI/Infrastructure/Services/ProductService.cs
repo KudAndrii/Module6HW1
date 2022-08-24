@@ -20,9 +20,18 @@ namespace Infrastructure.Services
             _products = Deserialize<ProductModel>(productsConfiguration.Value.ProductsDataPath);
         }
 
-        public void DeleteOne(int id)
+        public bool DeleteOne(int id)
         {
-            _products.Remove(GetById(id));
+            var product = GetById(id);
+            if (product != null)
+            {
+                _products.Remove(product);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<ProductModel> GetAll()
@@ -35,12 +44,20 @@ namespace Infrastructure.Services
             return _products.SingleOrDefault(p => p.ProductId == id);
         }
 
-        public void InsertOne(ProductModel model)
+        public bool InsertOne(ProductModel model)
         {
-            _products.Add(model);
+            if (_products.SingleOrDefault(p => p.ProductId == model.ProductId) != null)
+            {
+                _products.Add(model);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public void UpdateOne(ProductModel model)
+        public int UpdateOne(ProductModel model)
         {
             var index = _products.IndexOf(GetById(model.ProductId));
             if (index == -1)
@@ -51,6 +68,8 @@ namespace Infrastructure.Services
             {
                 _products[index] = model;
             }
+
+            return index;
         }
 
         /// <summary>
