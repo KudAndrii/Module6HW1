@@ -9,7 +9,6 @@ namespace Infrastructure.Services
     using Core;
     using Infrastructure.Interfaces;
     using Newtonsoft.Json;
-    using Infrastructure.Extentions;
     using Infrastructure.Configurations;
     using Microsoft.Extensions.Options;
 
@@ -43,14 +42,14 @@ namespace Infrastructure.Services
 
         public void UpdateOne(ProductModel model)
         {
-            var oldProduct = _products.SingleOrDefault(p => p.ProductId == model.ProductId);
-            if (oldProduct is not null)
+            var index = _products.IndexOf(GetById(model.ProductId));
+            if (index == -1)
             {
-                oldProduct.ReplaceNotNullProperties(model);
+                _products.Add(model);
             }
             else
             {
-                _products.Add(model);
+                _products[index] = model;
             }
         }
 
