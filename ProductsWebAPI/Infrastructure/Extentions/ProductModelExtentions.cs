@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.MyExtentions
+namespace Infrastructure.Extentions
 {
     using Core;
     public static class ProductModelExtentions

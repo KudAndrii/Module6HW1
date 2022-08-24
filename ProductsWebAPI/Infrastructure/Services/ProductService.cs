@@ -9,7 +9,7 @@ namespace Infrastructure.Services
     using Core;
     using Infrastructure.Interfaces;
     using Newtonsoft.Json;
-    using Infrastructure.MyExtentions;
+    using Infrastructure.Extentions;
     public class ProductService : IProductService
     {
         private const string _productInfoPath = @"C:\Users\cudan\Documents\GitHub\Module6HW1\ProductsWebAPI\Infrastructure\ProductsInfo.json";
