@@ -4,7 +4,13 @@ import ProductModel from "../Models/ProductModel";
 const GetProduct = async (id: number): Promise<ProductModel> => {
     const result: Response = await fetch(
         `${appConfig.appUrl}/api/Products/${id}`,
-        { headers: { "Access-Control-Allow-Origin": "*" } }
+        {
+            headers: {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Headers":
+                    "Origin, X-Requested-With, Content-Type, Accept",
+            },
+        }
     );
     const body = await result.json();
     debugger;
