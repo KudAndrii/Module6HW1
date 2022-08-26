@@ -1,6 +1,6 @@
 ﻿namespace Core
 {
-    public class ProductModel
+    public class Product
     {
         public int ProductId { get; set; }
         public string Name { get; set; }

@@ -28,7 +28,8 @@ namespace ProductsWebAPI
             app.UseCors(policy =>
             {
                 policy.WithHeaders("Access-Control-Allow-Origin");
-                policy.WithHeaders("Access-Control-Allow-Headers");
+                policy.AllowAnyHeader();
+                policy.AllowAnyMethod();
                 policy.WithOrigins("http://localhost:3000");
             });
             app.UseAuthorization();

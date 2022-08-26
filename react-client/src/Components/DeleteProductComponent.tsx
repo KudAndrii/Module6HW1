@@ -1,13 +1,12 @@
 import { useState } from "react";
 import DeleteProduct from "../CrudRequests/DeleteProduct";
 import { Button, Form } from "react-bootstrap";
-
-type Input = {
-    productId: { value: string };
-};
+import { idInput } from "../Types/Types";
 
 const DeleteProductComponent = (): JSX.Element => {
-    const [responseStatus, setResponseStatus] = useState<boolean>(false);
+    const [responseStatus, setResponseStatus] = useState<boolean | undefined>(
+        undefined
+    );
 
     return (
         <>
@@ -16,7 +15,7 @@ const DeleteProductComponent = (): JSX.Element => {
                     onSubmit={async (e) => {
                         e.preventDefault();
 
-                        const target = e.target as typeof e.target & Input;
+                        const target = e.target as typeof e.target & idInput;
                         async function init() {
                             let id: number = Number(target.productId.value);
                             const result = await DeleteProduct(id);
@@ -36,7 +35,12 @@ const DeleteProductComponent = (): JSX.Element => {
                         Delete
                     </Button>
                 </Form>
-                <div>Response: {responseStatus}</div>
+                <div>
+                    Response:{" "}
+                    {responseStatus === undefined
+                        ? ""
+                        : responseStatus.toString()}
+                </div>
             </div>
         </>
     );

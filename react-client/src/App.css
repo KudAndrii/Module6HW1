@@ -23,6 +23,12 @@
     color: white;
 }
 
+.list {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+
 .App-link {
     color: #61dafb;
 }

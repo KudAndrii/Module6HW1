@@ -5,17 +5,14 @@ const GetProduct = async (id: number): Promise<ProductModel> => {
     const result: Response = await fetch(
         `${appConfig.appUrl}/api/Products/${id}`,
         {
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers":
-                    "Origin, X-Requested-With, Content-Type, Accept",
-            },
+            headers: { "Access-Control-Allow-Origin": "*" },
         }
     );
     const body = await result.json();
-    debugger;
-    const product = body as ProductModel;
-    console.log(product);
+    let product = new Object() as ProductModel;
+    if (body) {
+        product = body as ProductModel;
+    }
     return product;
 };
 

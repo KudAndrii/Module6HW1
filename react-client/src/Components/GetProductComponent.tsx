@@ -2,10 +2,7 @@ import { useState } from "react";
 import GetProduct from "../CrudRequests/GetProduct";
 import ProductModel from "../Models/ProductModel";
 import { Button, Form } from "react-bootstrap";
-
-type Input = {
-    productId: { value: string };
-};
+import { idInput } from "../Types/Types";
 
 const GetProductComponent = (): JSX.Element => {
     const [product, setProduct] = useState<ProductModel | undefined>(undefined);
@@ -17,7 +14,7 @@ const GetProductComponent = (): JSX.Element => {
                     onSubmit={async (e) => {
                         e.preventDefault();
 
-                        const target = e.target as typeof e.target & Input;
+                        const target = e.target as typeof e.target & idInput;
                         async function init() {
                             let id: number = Number(target.productId.value);
                             const result = await GetProduct(id);
@@ -38,8 +35,8 @@ const GetProductComponent = (): JSX.Element => {
                     </Button>
                 </Form>
                 <div>
-                    Name: {product?.name}, Price: {product?.price}, About:{" "}
-                    {product?.shortDescription}
+                    Name: {product?.name || "product don't exist"}, Price:{" "}
+                    {product?.price || ""}, About: {product?.shortDescription}
                 </div>
             </div>
         </>

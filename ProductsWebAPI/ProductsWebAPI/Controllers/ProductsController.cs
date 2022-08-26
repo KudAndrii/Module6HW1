@@ -19,28 +19,36 @@ namespace ProductsWebAPI.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
-        public IEnumerable<ProductModel> Get()
+        public IEnumerable<Product> Get()
         {
             return _productService.GetAll();
         }
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public ProductModel Get(int id)
+        public Product Get(int id)
         {
-            return _productService.GetById(id);
+            var result = _productService.GetById(id);
+            if (result != null)
+            {
+                return result;
+            }
+            else
+            {
+                return new Product();
+            }
         }
 
         // POST api/<ProductsController>
         [HttpPost]
-        public bool Post([FromBody] ProductModel product)
+        public bool Post([FromBody] Product product)
         {
             return _productService.InsertOne(product);
         }
 
         // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
-        public int Put(int id, [FromBody] ProductModel product)
+        public int Put(int id, [FromBody] Product product)
         {
             product.ProductId = id;
             return _productService.UpdateOne(product);

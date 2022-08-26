@@ -17,7 +17,7 @@ function App() {
                     Edit <code>src/App.tsx</code> and save to reload.
                 </div>
             </header>
-            <ul>
+            <ul className="list">
                 <GetProductComponent />
                 <InsertProductComponent />
                 <UpdateProductComponent />

@@ -2,20 +2,12 @@ import { useState } from "react";
 import PutProduct from "../CrudRequests/PutProduct";
 import { Button, Form } from "react-bootstrap";
 import ProductModel from "../Models/ProductModel";
-
-type Input = {
-    product: {
-        id: number;
-        name: string;
-        src: string;
-        price: number;
-        shortDescription: string;
-        description: string;
-    };
-};
+import { Input } from "../Types/Types";
 
 const UpdateProductComponent = (): JSX.Element => {
-    const [responseStatus, setResponseStatus] = useState<number>(-1);
+    const [responseStatus, setResponseStatus] = useState<number | undefined>(
+        undefined
+    );
 
     return (
         <>
@@ -27,7 +19,14 @@ const UpdateProductComponent = (): JSX.Element => {
                         const target = e.target as typeof e.target & Input;
                         async function init() {
                             let product: ProductModel =
-                                target.product as ProductModel;
+                                new Object() as ProductModel;
+                            product.productId = Number(target.productId.value);
+                            product.name = target.name.value;
+                            product.src = target.src.value;
+                            product.price = Number(target.price.value);
+                            product.shortDescription =
+                                target.shortDescription.value;
+                            product.description = target.description.value;
                             const result = await PutProduct(product);
                             setResponseStatus(result);
                         }
@@ -35,37 +34,58 @@ const UpdateProductComponent = (): JSX.Element => {
                         await init();
                     }}
                 >
-                    <Form.Group controlId="product">
+                    <Form.Group controlId="productId">
                         <Form.Label>
                             <i>Enter product id</i>
                         </Form.Label>
-                        <Form.Control></Form.Control>
+                        <Form.Control name="productId"></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="name">
                         <Form.Label>
                             <i>Enter product name</i>
                         </Form.Label>
-                        <Form.Control></Form.Control>
+                        <Form.Control name="name"></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="src">
                         <Form.Label>
                             <i>Enter product src</i>
                         </Form.Label>
-                        <Form.Control></Form.Control>
+                        <Form.Control name="src"></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="price">
                         <Form.Label>
                             <i>Enter product price</i>
                         </Form.Label>
-                        <Form.Control></Form.Control>
+                        <Form.Control name="price"></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="shortDescription">
                         <Form.Label>
                             <i>Enter product shortDescription</i>
                         </Form.Label>
-                        <Form.Control></Form.Control>
+                        <Form.Control name="shortDescription"></Form.Control>
+                    </Form.Group>
+
+                    <Form.Group controlId="description">
                         <Form.Label>
                             <i>Enter product description</i>
                         </Form.Label>
-                        <Form.Control></Form.Control>
+                        <Form.Control name="description"></Form.Control>
                     </Form.Group>
+
                     <Button variant="btn btn-primary active" type="submit">
                         Put
                     </Button>
                 </Form>
-                <div>Product was updated with next id: {responseStatus}</div>
+                <div>
+                    Product was updated with next id:{" "}
+                    {responseStatus === undefined
+                        ? ""
+                        : responseStatus.toString()}
+                </div>
             </div>
         </>
     );

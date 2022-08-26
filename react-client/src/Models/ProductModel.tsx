@@ -1,5 +1,5 @@
 interface ProductModel {
-    id: number;
+    productId: number;
     name: string;
     src: string;
     price: number;
