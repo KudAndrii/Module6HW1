@@ -27,7 +27,6 @@ namespace ProductsWebAPI
             app.UseHttpsRedirection();
             app.UseCors(policy =>
             {
-                policy.WithHeaders("Access-Control-Allow-Origin");
                 policy.AllowAnyHeader();
                 policy.AllowAnyMethod();
                 policy.WithOrigins("http://localhost:3000");

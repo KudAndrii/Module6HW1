@@ -6,7 +6,6 @@ const PutProduct = async (product: ProductModel): Promise<number> => {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify(product),
     };
@@ -16,7 +15,6 @@ const PutProduct = async (product: ProductModel): Promise<number> => {
         requestOptions
     );
 
-    debugger;
     const body = await result.json();
     return body as number;
 };

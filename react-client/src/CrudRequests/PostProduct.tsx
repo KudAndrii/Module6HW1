@@ -6,14 +6,12 @@ const PostProduct = async (product: ProductModel): Promise<boolean> => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
         },
         body: JSON.stringify(product),
     };
 
-    debugger;
     const result: Response = await fetch(
-        `${appConfig.appUrl}/api/Products/${product.productId}`,
+        `${appConfig.appUrl}/api/Products`,
         requestOptions
     );
     const body = await result.json();

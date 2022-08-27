@@ -3,10 +3,7 @@ import ProductModel from "../Models/ProductModel";
 
 const GetProduct = async (id: number): Promise<ProductModel> => {
     const result: Response = await fetch(
-        `${appConfig.appUrl}/api/Products/${id}`,
-        {
-            headers: { "Access-Control-Allow-Origin": "*" },
-        }
+        `${appConfig.appUrl}/api/Products/${id}`
     );
     const body = await result.json();
     let product = new Object() as ProductModel;

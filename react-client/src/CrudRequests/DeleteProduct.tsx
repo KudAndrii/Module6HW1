@@ -3,9 +3,6 @@ import { appConfig } from "../apiConfig";
 const DeleteProduct = async (id: number): Promise<boolean> => {
     const requestOptions = {
         method: "DELETE",
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-        },
     };
     const result: Response = await fetch(
         `${appConfig.appUrl}/api/Products/${id}`,

@@ -46,7 +46,7 @@ namespace Infrastructure.Services
 
         public bool InsertOne(Product model)
         {
-            if (_products.SingleOrDefault(p => p.ProductId == model.ProductId) != null)
+            if (_products.SingleOrDefault(p => p.ProductId == model.ProductId) == null)
             {
                 _products.Add(model);
                 return true;

@@ -2,7 +2,7 @@ import { useState } from "react";
 import PostProduct from "../CrudRequests/PostProduct";
 import { Button, Form } from "react-bootstrap";
 import ProductModel from "../Models/ProductModel";
-import { Input } from "../Types/Types";
+import { productInput } from "../Types/Types";
 
 const DeleteProductComponent = (): JSX.Element => {
     const [responseStatus, setResponseStatus] = useState<boolean | undefined>(
@@ -16,18 +16,20 @@ const DeleteProductComponent = (): JSX.Element => {
                     onSubmit={async (e) => {
                         e.preventDefault();
 
-                        const target = e.target as typeof e.target & Input;
+                        const target = e.target as typeof e.target &
+                            productInput;
                         async function init() {
                             let product: ProductModel =
                                 new Object() as ProductModel;
+
                             product.productId = Number(target.productId.value);
                             product.name = target.name.value;
-                            product.src = target.src.value;
+                            product.url = target.url.value;
                             product.price = Number(target.price.value);
                             product.shortDescription =
                                 target.shortDescription.value;
                             product.description = target.description.value;
-                            debugger;
+
                             const result = await PostProduct(product);
                             setResponseStatus(result);
                         }
@@ -49,11 +51,11 @@ const DeleteProductComponent = (): JSX.Element => {
                         <Form.Control name="name"></Form.Control>
                     </Form.Group>
 
-                    <Form.Group controlId="src">
+                    <Form.Group controlId="url">
                         <Form.Label>
-                            <i>Enter product src</i>
+                            <i>Enter product url</i>
                         </Form.Label>
-                        <Form.Control name="src"></Form.Control>
+                        <Form.Control name="url"></Form.Control>
                     </Form.Group>
 
                     <Form.Group controlId="price">

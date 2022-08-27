@@ -1,7 +1,7 @@
 export type productInput = {
     productId: { value: number };
     name: { value: string };
-    src: { value: string };
+    url: { value: string };
     price: { value: number };
     shortDescription: { value: string };
     description: { value: string };

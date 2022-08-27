@@ -1,7 +1,7 @@
 interface ProductModel {
     productId: number;
     name: string;
-    src: string;
+    url: string;
     price: number;
     shortDescription: string;
     description: string;
