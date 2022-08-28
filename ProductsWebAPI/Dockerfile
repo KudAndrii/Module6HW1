@@ -7,6 +7,7 @@ COPY ProductsWebAPI.sln ./
 COPY ProductsWebAPI/*.csproj ./ProductsWebAPI/
 COPY Core/*.csproj ./Core/
 COPY Infrastructure/*.csproj ./Infrastructure/
+COPY ProductsWebAPI/products.json ./
 
 RUN dotnet restore
 

@@ -24,7 +24,6 @@ namespace ProductsWebAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
             app.UseCors(policy =>
             {
                 policy.AllowAnyHeader();
