@@ -1,0 +1,12 @@
+version: "3"
+services:
+    api:
+        build: ./ProductsWebAPI/
+        ports:
+            - "8080:8888"
+        container_name: products-api-container
+    client:
+        build: ./react-client/
+        ports:
+            - "3000:3333"
+        container_name: products-client-container
