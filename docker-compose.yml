@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+    backend:
+        image: asp-api:v1
+        build: ./ProductsWebAPI
+        ports:
+            - "8080:8888"
+        container_name: server
+    frontend:
+        image: react-client:v1
+        build: ./react-client
+        ports:
+            - "5001:3000"
+        container_name: client

@@ -28,7 +28,7 @@ namespace ProductsWebAPI
             {
                 policy.AllowAnyHeader();
                 policy.AllowAnyMethod();
-                policy.WithOrigins("http://localhost:3000");
+                policy.WithOrigins("http://localhost:5001");
             });
             app.UseAuthorization();
 

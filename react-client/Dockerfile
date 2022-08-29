@@ -1,20 +1,15 @@
-FROM node:16-alpine as builder
+FROM node:16-alpine
 
-WORKDIR /react-client-app
+WORKDIR /app
 
 COPY package.json ./
 
-RUN npm install --only=prod
+RUN npm install
 
 COPY . ./
 
 RUN npm run build
 
-FROM nginx:1.16.0-alpine
-
-COPY --from=builder ./ /usr/share/nginx/html
-
-EXPOSE 3000
 EXPOSE 8080
-
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 5001
+CMD ["npm", "start"]
