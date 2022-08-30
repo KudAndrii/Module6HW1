@@ -24,12 +24,11 @@ namespace ProductsWebAPI
                 app.UseSwaggerUI();
             }
 
-            app.UseHttpsRedirection();
             app.UseCors(policy =>
             {
                 policy.AllowAnyHeader();
                 policy.AllowAnyMethod();
-                policy.WithOrigins("http://localhost:3000");
+                policy.WithOrigins("http://localhost:5001");
             });
             app.UseAuthorization();
 
