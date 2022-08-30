@@ -14,10 +14,10 @@ namespace Infrastructure.Services
 
     public class ProductService : IProductService
     {
-        public List<ProductModel> _products;
+        public List<Product> _products;
         public ProductService(IOptions<ProductsConfiguration> productsConfiguration)
         {
-            _products = Deserialize<ProductModel>(productsConfiguration.Value.ProductsDataPath);
+            _products = Deserialize<Product>(productsConfiguration.Value.ProductsDataPath);
         }
 
         public bool DeleteOne(int id)
@@ -34,19 +34,19 @@ namespace Infrastructure.Services
             }
         }
 
-        public List<ProductModel> GetAll()
+        public List<Product> GetAll()
         {
             return _products;
         }
 
-        public ProductModel GetById(int id)
+        public Product GetById(int id)
         {
             return _products.SingleOrDefault(p => p.ProductId == id);
         }
 
-        public bool InsertOne(ProductModel model)
+        public bool InsertOne(Product model)
         {
-            if (_products.SingleOrDefault(p => p.ProductId == model.ProductId) != null)
+            if (_products.SingleOrDefault(p => p.ProductId == model.ProductId) == null)
             {
                 _products.Add(model);
                 return true;
@@ -57,7 +57,7 @@ namespace Infrastructure.Services
             }
         }
 
-        public int UpdateOne(ProductModel model)
+        public int UpdateOne(Product model)
         {
             var index = _products.IndexOf(GetById(model.ProductId));
             if (index == -1)
