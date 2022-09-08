@@ -4,7 +4,7 @@
 
 namespace ProductsWebAPI.Controllers
 {
-    using Core;
+    using Core.Entities;
     using Infrastructure.Interfaces;
 
     [Route("api/[controller]")]
