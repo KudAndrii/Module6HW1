@@ -20,10 +20,11 @@ namespace ProductsWebAPI.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
-        // [Authorize]
+        [Authorize(Roles = "User")]
         // [ValidateAntiForgeryToken]
         public IEnumerable<Product> Get()
         {
+            var r = User.Identity.Name;
             return _productService.GetAll();
         }
 
@@ -59,6 +60,7 @@ namespace ProductsWebAPI.Controllers
 
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public bool Delete(int id)
         {
             return _productService.DeleteOne(id);

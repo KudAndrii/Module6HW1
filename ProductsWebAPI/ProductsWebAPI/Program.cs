@@ -5,8 +5,10 @@ using Infrastructure.Interfaces;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using ProductsWebAPI.Helpers;
 using ProductsWebAPI.Models;
+using System.Text;
 
 namespace ProductsWebAPI
 {
@@ -19,7 +21,21 @@ namespace ProductsWebAPI
             builder.Services.AddControllers();
 
             // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
-
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.SaveToken = true;
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidAudience = builder.Configuration["Jwt:Audience"],
+                        ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                    };
+                });
+            
             builder.Services.AddSingleton<IProductService, ProductService>();
             builder.Services.AddSingleton<IAccountService<User, RegisterModel>, AccountService>();
             builder.Services.Configure<ProductsConfiguration>(builder.Configuration.GetSection("ProductsConfiguration"));
@@ -41,7 +57,7 @@ namespace ProductsWebAPI
                 policy.AllowAnyMethod();
             });
 
-            app.UseMiddleware<JwtMiddleware>();
+            // app.UseMiddleware<JwtMiddleware>();
 
             app.UseAuthentication();
             app.UseAuthorization();

@@ -1,4 +1,6 @@
 ﻿using Core.Entities;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using ProductsWebAPI.Models;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,15 +14,24 @@ namespace ProductsWebAPI.Helpers
         public static string GenerateJwtToken(this IConfiguration configuration, User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(configuration["Secret"]);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", user.Id.ToString()) }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var claims = new[] {
+                        new Claim(JwtRegisteredClaimNames.Sub, configuration["Jwt:Subject"]),
+                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                        new Claim("Id", user.Id.ToString()),
+                        new Claim("Login", user.Login),
+                        new Claim("Role", user.Role.ToString())
+                    };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));
+            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                configuration["Jwt:Issuer"],
+                configuration["Jwt:Audience"],
+                claims,
+                expires: DateTime.UtcNow.AddMinutes(10),
+                signingCredentials: signIn);
+
             return tokenHandler.WriteToken(token);
         }
     }

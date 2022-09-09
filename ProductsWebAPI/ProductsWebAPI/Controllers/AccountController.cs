@@ -60,5 +60,21 @@ namespace ProductsWebAPI.Controllers
 
             return Ok(new AuthenticateResponseModel(user.Login, token));
         }
+
+        /*
+        // GET api/<AccountController>
+        [HttpGet("Logout")]
+        public bool Logout()
+        {
+            try
+            {
+                _configuration.toke
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        */
     }
 }
