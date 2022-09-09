@@ -1,8 +1,8 @@
 ﻿namespace ProductsWebAPI.Models
 {
-    public class AuthenticateResponse
+    public class AuthenticateResponseModel
     {
-        public AuthenticateResponse(string login, string token)
+        public AuthenticateResponseModel(string login, string token)
         {
             Login = login;
             Token = token;

@@ -4,6 +4,7 @@ using Infrastructure.Configurations;
 using Infrastructure.Interfaces;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ProductsWebAPI.Helpers;
 using ProductsWebAPI.Models;
 
@@ -17,7 +18,7 @@ namespace ProductsWebAPI
 
             builder.Services.AddControllers();
 
-
+            // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
 
             builder.Services.AddSingleton<IProductService, ProductService>();
             builder.Services.AddSingleton<IAccountService<User, RegisterModel>, AccountService>();

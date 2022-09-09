@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Infrastructure.Services;
+using Core.Interfaces;
+using ProductsWebAPI.Models;
+using Core.Entities;
 
 namespace ProductsWebAPI.Helpers
 {
@@ -23,17 +26,17 @@ namespace ProductsWebAPI.Helpers
             _configuration = configuration;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService)
+        public async Task Invoke(HttpContext context, IAccountService<User, RegisterModel> accountService)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                AttachUserToContext(context, userService, token);
+                AttachUserToContext(context, accountService, token);
 
             await _next(context);
         }
 
-        public void AttachUserToContext(HttpContext context, IUserService userService, string token)
+        public void AttachUserToContext(HttpContext context, IAccountService<User, RegisterModel> accountService, string token)
         {
             try
             {
@@ -52,7 +55,7 @@ namespace ProductsWebAPI.Helpers
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
-                context.Items["User"] = userService.GetById(userId);
+                context.Items["User"] = accountService.GetById(userId);
             }
             catch
             {

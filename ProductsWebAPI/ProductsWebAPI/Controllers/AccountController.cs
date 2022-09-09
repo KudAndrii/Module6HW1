@@ -7,6 +7,7 @@ namespace ProductsWebAPI.Controllers
     using Core.Entities;
     using Core.Interfaces;
     using Microsoft.Extensions.Configuration;
+    using ProductsWebAPI.Helpers;
     using ProductsWebAPI.Models;
     using System.Reflection;
 
@@ -24,34 +25,40 @@ namespace ProductsWebAPI.Controllers
 
         // POST api/<AccountController>
         [HttpPost("Register")]
-        public AuthenticateResponse Register([FromBody] RegisterModel registerModel)
+        public IActionResult Register([FromBody] RegisterModel registerModel)
         {
-            if (ModelState.IsValid && _accountService.GetAll().SingleOrDefault(x => x.Login == registerModel.Login) == null)
+            if (ModelState.IsValid)
             {
-                string token = _configuration(user);
+                if (_accountService.GetAll().SingleOrDefault(x => x.Login == registerModel.Login) == null)
+                {
+                    var user = _accountService.Add(registerModel);
+                    string token = _configuration.GenerateJwtToken(user);
 
-                return new AuthenticateResponse(_accountService.Add(registerModel), token);
+                    return Ok(new AuthenticateResponseModel(user.Login, token));
+                }
+                else
+                {
+                    return BadRequest(new { message = "User with this login is already exist." });
+                }
             }
-            else
-            {
-                return null;
-            }
+
+            return BadRequest(new { message = "Invalid parameters." });
         }
 
         // POST api/<AccountController>
         [HttpPost("Login")]
-        public AuthenticateResponse Login([FromBody] UserModel userModel)
+        public IActionResult Login([FromBody] UserModel userModel)
         {
             var user = _accountService.GetAll().FirstOrDefault(x => x.Login == userModel.Login && x.Password == userModel.Password.GetHashCode());
 
-            if (user != null)
+            if (user == null)
             {
-                return null;
+                return BadRequest(new { message = "Login or password is incorrect" });
             }
 
-            string token = _configuration (user);
+            string token = _configuration.GenerateJwtToken(user);
 
-            return new AuthenticateResponse(user.Login, token);
+            return Ok(new AuthenticateResponseModel(user.Login, token));
         }
     }
 }

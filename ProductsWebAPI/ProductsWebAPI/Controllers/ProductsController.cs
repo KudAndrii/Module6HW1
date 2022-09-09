@@ -6,6 +6,7 @@ namespace ProductsWebAPI.Controllers
 {
     using Core.Entities;
     using Infrastructure.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -19,6 +20,8 @@ namespace ProductsWebAPI.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
+        // [Authorize]
+        // [ValidateAntiForgeryToken]
         public IEnumerable<Product> Get()
         {
             return _productService.GetAll();

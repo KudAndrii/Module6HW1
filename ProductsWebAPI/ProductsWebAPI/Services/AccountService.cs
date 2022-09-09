@@ -24,7 +24,7 @@ namespace Infrastructure.Services
 			_users = new List<User>();
 		}
 
-		public string Add(RegisterModel model)
+		public User Add(RegisterModel model)
 		{
 			var user = new User()
 			{
@@ -33,7 +33,9 @@ namespace Infrastructure.Services
 				Role = model.Login.Contains("su") ? Role.Admin : Role.User
 			};
 
-			return _users.Select(x => x.Login).SingleOrDefault(login => login == user.Login);
+			_users.Add(user);
+
+			return _users.SingleOrDefault(x => x.Login == user.Login);
 		}
 
 		public IEnumerable<User> GetAll()

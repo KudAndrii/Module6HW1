@@ -15,6 +15,6 @@ namespace Core.Interfaces
         public TUser GetById(int id);
 
 
-        public string Add(TModel model);
+        public TUser Add(TModel model);
     }
 }
