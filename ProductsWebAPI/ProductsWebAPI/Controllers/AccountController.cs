@@ -47,9 +47,9 @@ namespace ProductsWebAPI.Controllers
 
         // POST api/<AccountController>
         [HttpPost("Login")]
-        public IActionResult Login([FromBody] UserModel userModel)
+        public IActionResult Login([FromBody] LoginModel loginModel)
         {
-            var user = _accountService.GetAll().FirstOrDefault(x => x.Login == userModel.Login && x.Password == userModel.Password.GetHashCode());
+            var user = _accountService.GetAll().FirstOrDefault(x => x.Login == loginModel.Login && x.Password == loginModel.Password.GetHashCode());
 
             if (user == null)
             {
@@ -60,21 +60,5 @@ namespace ProductsWebAPI.Controllers
 
             return Ok(new AuthenticateResponseModel(user.Login, token));
         }
-
-        /*
-        // GET api/<AccountController>
-        [HttpGet("Logout")]
-        public bool Logout()
-        {
-            try
-            {
-                _configuration.toke
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-        */
     }
 }

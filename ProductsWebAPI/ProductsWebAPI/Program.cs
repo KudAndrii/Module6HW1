@@ -1,4 +1,5 @@
 using Core.Entities;
+using Core.Enums;
 using Core.Interfaces;
 using Infrastructure.Configurations;
 using Infrastructure.Interfaces;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using ProductsWebAPI.Helpers;
 using ProductsWebAPI.Models;
+using System.Security.Claims;
 using System.Text;
 
 namespace ProductsWebAPI
@@ -20,7 +22,6 @@ namespace ProductsWebAPI
 
             builder.Services.AddControllers();
 
-            // builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme);
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -32,10 +33,11 @@ namespace ProductsWebAPI
                         ValidateAudience = true,
                         ValidAudience = builder.Configuration["Jwt:Audience"],
                         ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                        ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
                     };
                 });
-            
+
             builder.Services.AddSingleton<IProductService, ProductService>();
             builder.Services.AddSingleton<IAccountService<User, RegisterModel>, AccountService>();
             builder.Services.Configure<ProductsConfiguration>(builder.Configuration.GetSection("ProductsConfiguration"));
@@ -56,8 +58,6 @@ namespace ProductsWebAPI
                 policy.AllowAnyHeader();
                 policy.AllowAnyMethod();
             });
-
-            // app.UseMiddleware<JwtMiddleware>();
 
             app.UseAuthentication();
             app.UseAuthorization();

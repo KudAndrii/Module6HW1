@@ -2,7 +2,7 @@
 
 namespace ProductsWebAPI.Models
 {
-    public class UserModel
+    public class LoginModel
     {
         [Required]
         public string Login { get; set; }

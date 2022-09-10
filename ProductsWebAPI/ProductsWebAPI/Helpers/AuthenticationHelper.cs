@@ -18,9 +18,8 @@ namespace ProductsWebAPI.Helpers
                         new Claim(JwtRegisteredClaimNames.Sub, configuration["Jwt:Subject"]),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                        new Claim("Id", user.Id.ToString()),
-                        new Claim("Login", user.Login),
-                        new Claim("Role", user.Role.ToString())
+                        new Claim(ClaimTypes.Name, user.Login),
+                        new Claim(ClaimTypes.Role, user.Role.ToString())
                     };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]));

@@ -20,8 +20,7 @@ namespace ProductsWebAPI.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
-        [Authorize(Roles = "User")]
-        // [ValidateAntiForgeryToken]
+        [Authorize(Roles = "User, Admin")]
         public IEnumerable<Product> Get()
         {
             var r = User.Identity.Name;
@@ -45,6 +44,7 @@ namespace ProductsWebAPI.Controllers
 
         // POST api/<ProductsController>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public bool Post([FromBody] Product product)
         {
             return _productService.InsertOne(product);
@@ -52,6 +52,7 @@ namespace ProductsWebAPI.Controllers
 
         // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public int Put(int id, [FromBody] Product product)
         {
             product.ProductId = id;
