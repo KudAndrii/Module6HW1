@@ -4,8 +4,9 @@
 
 namespace ProductsWebAPI.Controllers
 {
-    using Core;
+    using Core.Entities;
     using Infrastructure.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
 
     [Route("api/[controller]")]
     [ApiController]
@@ -19,8 +20,10 @@ namespace ProductsWebAPI.Controllers
 
         // GET: api/<ProductsController>
         [HttpGet]
+        [Authorize(Roles = "User, Admin")]
         public IEnumerable<Product> Get()
         {
+            var r = User.Identity.Name;
             return _productService.GetAll();
         }
 
@@ -41,6 +44,7 @@ namespace ProductsWebAPI.Controllers
 
         // POST api/<ProductsController>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public bool Post([FromBody] Product product)
         {
             return _productService.InsertOne(product);
@@ -48,6 +52,7 @@ namespace ProductsWebAPI.Controllers
 
         // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public int Put(int id, [FromBody] Product product)
         {
             product.ProductId = id;
@@ -56,6 +61,7 @@ namespace ProductsWebAPI.Controllers
 
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public bool Delete(int id)
         {
             return _productService.DeleteOne(id);

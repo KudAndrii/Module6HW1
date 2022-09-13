@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Interfaces
 {
-    using Core;
+    using Core.Entities;
+
     public interface IProductService
     {
         /// <summary>

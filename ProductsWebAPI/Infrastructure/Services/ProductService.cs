@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    using Core;
     using Infrastructure.Interfaces;
     using Newtonsoft.Json;
     using Infrastructure.Configurations;
     using Microsoft.Extensions.Options;
+    using Core.Entities;
 
     public class ProductService : IProductService
     {
