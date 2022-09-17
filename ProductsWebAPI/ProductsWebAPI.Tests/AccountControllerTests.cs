@@ -64,7 +64,7 @@ namespace ProductsWebAPI.Tests
         {
             // Arrange
 
-            var registerModel = new RegisterModel() { Login = "user", Password = "123", PasswordConfirm = "123" };
+            var registerModel = new RegisterModel() { Login = "validUser", Password = "123", PasswordConfirm = "123" };
 
             // Act
 
