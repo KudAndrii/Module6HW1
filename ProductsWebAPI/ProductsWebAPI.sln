@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductsWebAPI", "ProductsWebAPI\ProductsWebAPI.csproj", "{6157FDBF-DEC5-4837-9D54-63305C59F9DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsWebAPI", "ProductsWebAPI\ProductsWebAPI.csproj", "{6157FDBF-DEC5-4837-9D54-63305C59F9DE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{9B826117-93B1-493F-B4B1-812FAD709D71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{9B826117-93B1-493F-B4B1-812FAD709D71}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{E3C110E2-96F5-4841-93F3-F3097F3AEA28}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Tests", "Infrastructure.Tests\Infrastructure.Tests.csproj", "{5CEEB9CD-9771-4035-8774-BEA32FD67261}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductsWebAPI.Tests", "ProductsWebAPI.Tests\ProductsWebAPI.Tests.csproj", "{E6DE2848-FCC0-4811-B8C4-74887D018FCA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{E3C110E2-96F5-4841-93F3-F3097F3AEA28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,14 +27,6 @@ Global
 		{E3C110E2-96F5-4841-93F3-F3097F3AEA28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3C110E2-96F5-4841-93F3-F3097F3AEA28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3C110E2-96F5-4841-93F3-F3097F3AEA28}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CEEB9CD-9771-4035-8774-BEA32FD67261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CEEB9CD-9771-4035-8774-BEA32FD67261}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CEEB9CD-9771-4035-8774-BEA32FD67261}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CEEB9CD-9771-4035-8774-BEA32FD67261}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E6DE2848-FCC0-4811-B8C4-74887D018FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E6DE2848-FCC0-4811-B8C4-74887D018FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E6DE2848-FCC0-4811-B8C4-74887D018FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E6DE2848-FCC0-4811-B8C4-74887D018FCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

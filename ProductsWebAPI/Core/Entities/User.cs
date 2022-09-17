@@ -20,21 +20,5 @@ namespace Core.Entities
         public string Login { get; init; }
         public int Password { get; init; }
         public Role Role { get; init; }
-
-        public override bool Equals(object? obj)
-        {
-            var result = false;
-
-            if (obj is User)
-            {
-                var user = obj as User;
-
-                result = Login == user.Login ? true : false;
-                result = Password == user.Password ? true : false;
-                result = Role == user.Role ? true : false;
-            }
-
-            return result;
-        }
     }
 }

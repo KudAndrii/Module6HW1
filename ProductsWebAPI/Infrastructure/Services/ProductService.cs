@@ -14,7 +14,7 @@ namespace Infrastructure.Services
 
     public class ProductService : IProductService
     {
-        private List<Product> _products;
+        public List<Product> _products;
         public ProductService(IOptions<ProductsConfiguration> productsConfiguration)
         {
             _products = Deserialize<Product>(productsConfiguration.Value.ProductsDataPath);
