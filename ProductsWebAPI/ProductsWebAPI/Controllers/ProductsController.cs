@@ -23,7 +23,6 @@ namespace ProductsWebAPI.Controllers
         [Authorize(Roles = "User, Admin")]
         public IEnumerable<Product> Get()
         {
-            var r = User.Identity.Name;
             return _productService.GetAll();
         }
 
